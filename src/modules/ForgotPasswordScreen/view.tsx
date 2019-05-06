@@ -6,6 +6,20 @@ import styles from './style'
 
 // create a component
 class ForgotPasswordScreen extends Component {
+
+    static navigationOptions = ({ navigation }) => {
+        return {
+            title: 'Forgot Password',
+            headerTitleStyle: {
+                fontSize: 17
+            },
+            headerTintColor: color.foreground,
+            headerStyle: {
+                backgroundColor: color.background,
+            },
+            
+        }
+    };
     render() {
         return (
             <View style={styles.container}>
