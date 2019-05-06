@@ -20,14 +20,24 @@ export interface State {
 }
 // create a component
 class LoginScreen extends React.Component<Props, State> {
-    static navigationOptions = {
-        header: null
-    }
+    static navigationOptions = ({ navigation }) => {
+        return {
+            title: 'Login',
+            headerTitleStyle: {
+                fontSize: 17
+            },
+            headerTintColor: color.foreground,
+            headerStyle: {
+                backgroundColor: color.background,
+            },
+
+        }
+    };
 
     render() {
         return (
 
-            <KeyboardAvoidingView behavior="height" style={{ flex: 1, flexDirection: 'column' }}>
+            <KeyboardAvoidingView behavior="height" style={{ flex: 1, backgroundColor:color.foreground,flexDirection: 'column' }}>
 
                 <View style={{ flex: 1 }}>
                 </View>
@@ -114,7 +124,7 @@ class LoginScreen extends React.Component<Props, State> {
                     <View style={{ marginTop: 10, alignSelf: 'center', flexDirection: 'row' }}>
                         <Text style={{ color: color.background }}>Forgot </Text>
                         <TouchableOpacity onPress={() => this.props.navigation.navigate('ForgotPasswordScreen')}>
-                            <Text style={{ fontWeight: 'bold', color: color.background }}>Password?</Text>
+                            <Text style={{ fontWeight: 'bold', color: color.background,fontSize:16 }}>Password?</Text>
                         </TouchableOpacity>
                     </View>
 

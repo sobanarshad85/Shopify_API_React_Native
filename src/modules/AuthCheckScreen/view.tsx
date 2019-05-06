@@ -12,13 +12,13 @@ class AuthCheckScreen extends Component {
     static token: Boolean = false;
     componentDidMount() {
         setTimeout(() => {
-            controller.authChecking(this.token, this.props.navigation)
+            controller.authChecking(AuthCheckScreen.token, this.props.navigation)
         }, 1500)
     }
     render() {
         return (
             <View style={styles.container}>
-                <Text style={{ fontSize: 30, fontWeight: 'bold', color: color.background }}>{strings.appName}</Text>
+                <Text style={{ color: color.background, fontSize: 30, fontWeight: 'bold', }}>{strings.appName}</Text>
                 <Text style={{ color: color.background }}>This is splash Screen</Text>
             </View>
         );

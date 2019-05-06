@@ -38,7 +38,7 @@ class RegisterScreen extends React.Component<Props, State> {
     };
     render() {
         return (
-            <KeyboardAvoidingView behavior="height" style={{ flex: 1, flexDirection: 'column' }}>
+            <KeyboardAvoidingView behavior="height" style={{ flex: 1, backgroundColor: color.foreground, flexDirection: 'column' }}>
 
 
 
