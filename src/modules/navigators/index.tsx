@@ -50,7 +50,7 @@ const AppStack = createBottomTabNavigator({
         }
     }
 }, {
-        initialRouteName: 'CategoriesScreen',
+        initialRouteName: 'ProductScreens',
         tabBarOptions: {
             showLabel: true,
             showIcon: true,
