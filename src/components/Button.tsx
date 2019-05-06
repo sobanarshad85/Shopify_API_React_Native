@@ -22,15 +22,16 @@ export interface Props {
 
 const ButtonWithoutIcon = (props: any) => {
     const { style, textStyle, children, ...propss } = props
-
+    const backgroundColor = style
     return (
         <TouchableOpacity
             style={{
                 // backgroundColor: '#2b78f9',
-                backgroundColor: props.disabled ? 'gray' : '#4156b5',
+
                 borderRadius: 5,
 
-                ...style
+                ...style,
+                backgroundColor: props.disabled ? 'gray' : backgroundColor ? style.backgroundColor : '#4156b5',
             }}
             {...propss}
         >
@@ -53,13 +54,14 @@ const ButtonWithIcon = (props: any) => {
     const { style, textStyle, children, iconDetails, ...propss } = props
     const paddingHorizontal = textStyle && textStyle.paddingHorizontal ? textStyle.paddingHorizontal : 20
     const { name, color, size } = iconDetails;
+    const backgroundColor = style
     return (
         <TouchableOpacity
             style={{
                 // backgroundColor: '#2b78f9',
-                backgroundColor: props.disabled ? 'gray' : '#4156b5',
                 borderRadius: 5,
-                ...style
+                ...style,
+                backgroundColor: props.disabled ? 'gray' : backgroundColor ? style.backgroundColor : '#4156b5',
             }}
             {...propss}
         >
