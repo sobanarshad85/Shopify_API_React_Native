@@ -20,7 +20,7 @@ export interface Props {
 
 // create a component
 
-const ButtonWithoutIcon = (props: any) => {
+const ButtonWithoutIcon = (props: Props) => {
     const { style, textStyle, children, ...propss } = props
     const backgroundColor = style
     return (
@@ -50,7 +50,7 @@ const ButtonWithoutIcon = (props: any) => {
     )
 }
 
-const ButtonWithIcon = (props: any) => {
+const ButtonWithIcon = (props: Props) => {
     const { style, textStyle, children, iconDetails, ...propss } = props
     const paddingHorizontal = textStyle && textStyle.paddingHorizontal ? textStyle.paddingHorizontal : 20
     const { name, color, size } = iconDetails;

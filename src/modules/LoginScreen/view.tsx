@@ -1,6 +1,6 @@
 //import liraries
 import React, { Fragment } from 'react';
-import { View, Text, StyleSheet, ScrollView, TouchableOpacity, ActivityIndicator, KeyboardAvoidingView } from 'react-native';
+import { View, Text, StyleSheet, ScrollView, TouchableOpacity, Image, ActivityIndicator, KeyboardAvoidingView } from 'react-native';
 import color from '../../resources/colors'
 import styles from './style'
 import AuthCheckScreen from '../AuthCheckScreen/view'
@@ -37,9 +37,13 @@ class LoginScreen extends React.Component<Props, State> {
     render() {
         return (
 
-            <KeyboardAvoidingView behavior="height" style={{ flex: 1, backgroundColor:color.foreground,flexDirection: 'column' }}>
+            <KeyboardAvoidingView behavior="height" style={{ flex: 1, backgroundColor: color.foreground, flexDirection: 'column' }}>
 
-                <View style={{ flex: 1 }}>
+                <View style={{ flex: 1 ,justifyContent:'center',alignItems:'center'}}>
+                    <Image
+                        style={{ width: 250, height: 250 }}
+                        source={{ uri: 'https://facebook.github.io/react-native/docs/assets/favicon.png' }}
+                    />
                 </View>
 
                 <View style={{ flex: 1 }}>
@@ -124,7 +128,7 @@ class LoginScreen extends React.Component<Props, State> {
                     <View style={{ marginTop: 10, alignSelf: 'center', flexDirection: 'row' }}>
                         <Text style={{ color: color.background }}>Forgot </Text>
                         <TouchableOpacity onPress={() => this.props.navigation.navigate('ForgotPasswordScreen')}>
-                            <Text style={{ fontWeight: 'bold', color: color.background,fontSize:16 }}>Password?</Text>
+                            <Text style={{ fontWeight: 'bold', color: color.background, fontSize: 16 }}>Password?</Text>
                         </TouchableOpacity>
                     </View>
 

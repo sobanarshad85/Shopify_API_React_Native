@@ -9,6 +9,7 @@ import RegisterScreen from '../RegisterScreen/view'
 import ProductListingScreen from '../ProductListingScreen/view'
 import ProductDetailScreen from '../ProductDetailScreen/view';
 import Entypo from 'react-native-vector-icons/Entypo';
+import color from '../../resources/colors'
 
 
 const ProductScreens = createStackNavigator({
@@ -55,9 +56,9 @@ const AppStack = createBottomTabNavigator({
             showLabel: true,
             showIcon: true,
             style: {
-                backgroundColor: 'white',
-            }
-            // activeTintColor: 'red',
+                backgroundColor: color.foreground,
+            },
+            activeTintColor: color.background,
         }
     })
 

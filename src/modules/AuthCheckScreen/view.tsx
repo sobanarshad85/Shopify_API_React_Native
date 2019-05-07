@@ -9,11 +9,11 @@ import strings from '../../resources/constants'
 
 // create a component
 class AuthCheckScreen extends Component {
-    static token: Boolean = false;
+    static token: Boolean = true;
     componentDidMount() {
         setTimeout(() => {
             controller.authChecking(AuthCheckScreen.token, this.props.navigation)
-        }, 1500)
+        }, 1000)
     }
     render() {
         return (
