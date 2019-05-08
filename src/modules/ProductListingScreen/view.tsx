@@ -140,7 +140,7 @@ export default class ProductListingScreen extends React.Component<Props, State> 
     renderHeader = () => {
 
 
-        return <View style={{ backgroundColor: color.white, }} onLayout={this._onLayoutDidChange} >
+        return <View style={{ backgroundColor: color.white, flex:1}} onLayout={this._onLayoutDidChange} >
             <Carousel
                 delay={1500}
                 style={this.state.size}

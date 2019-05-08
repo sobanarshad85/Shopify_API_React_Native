@@ -116,7 +116,7 @@ class LoginScreen extends React.Component<Props, State> {
                                             disabled={!isValid}
                                             onPress={handleSubmit}
                                             style={{ backgroundColor: color.background, marginTop: 10, }}
-                                            textStyle={{ color: color.foreground, paddingHorizontal: 27, paddingVertical: 12 }}
+                                            textStyle={{ color: color.foreground, paddingHorizontal: 16, paddingVertical: 5 }}
                                         >
                                             Login
                                         </Button>
