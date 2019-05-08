@@ -9,7 +9,7 @@ import strings from '../../resources/constants'
 
 // create a component
 class AuthCheckScreen extends Component {
-    static token: Boolean = true;
+    static token: Boolean = false;
     componentDidMount() {
         setTimeout(() => {
             controller.authChecking(AuthCheckScreen.token, this.props.navigation)

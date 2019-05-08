@@ -34,6 +34,13 @@ class LoginScreen extends React.Component<Props, State> {
         }
     };
 
+    constructor() {
+        super();
+        this.state = {
+            signingIn: false,
+        }
+    }
+
     render() {
         return (
 
@@ -54,6 +61,7 @@ class LoginScreen extends React.Component<Props, State> {
                             this.setState({
                                 email: values.email,
                                 password: values.password,
+                                signingIn:true
                             })
                             setTimeout(() => {
                                 AuthCheckScreen.token = true
@@ -125,35 +133,35 @@ class LoginScreen extends React.Component<Props, State> {
                         )}
                     </Formik>
 
-                    <View style={{ marginTop: 10, alignSelf: 'center', flexDirection: 'row' }}>
-                        <Text style={{ color: color.background }}>Forgot </Text>
-                        <TouchableOpacity onPress={() => this.props.navigation.navigate('ForgotPasswordScreen')}>
-                            <Text style={{ fontWeight: 'bold', color: color.background, fontSize: 16 }}>Password?</Text>
-                        </TouchableOpacity>
-                    </View>
-
-                </View>
-                {/* <View style={{marginVertical:20}}>
-                <Button onPress={() => this.props.navigation.navigate('ForgotPasswordScreen')}>Forgot Password</Button>
-                </View>
-                <Button onPress={() => this.props.navigation.navigate('RegisterScreen')} >Register</Button>
-                 */}
-
-
-
-                <View style={{ flex: 1, justifyContent: 'flex-end', }}>
-                    <View style={{ backgroundColor: color.background, height: 1, width: '100%' }}></View>
-                    <View style={{ alignSelf: 'center', flexDirection: 'row', marginVertical: 10 }}>
-
-                        <Text style={{ color: color.background }}>Don't have an accout? </Text>
-                        <TouchableOpacity onPress={() => this.props.navigation.navigate('RegisterScreen')}>
-                            <Text style={{ fontWeight: 'bold', color: color.background }}>Register</Text>
-                        </TouchableOpacity>
-                    </View>
-                    <View style={{ backgroundColor: color.background, height: 1, width: '100%', marginBottom: 10 }}></View>
+                    {
+                        this.state.signingIn ?
+                            null
+                            :
+                            <View style={{ marginTop: 10, alignSelf: 'center', flexDirection: 'row' }}>
+                                <Text style={{ color: color.background }}>Forgot </Text>
+                                <TouchableOpacity onPress={() => this.props.navigation.navigate('ForgotPasswordScreen')}>
+                                    <Text style={{ fontWeight: 'bold', color: color.background, fontSize: 16 }}>Password?</Text>
+                                </TouchableOpacity>
+                            </View>
+                    }
                 </View>
 
+                {
+                    this.state.signingIn ?
+                        null
+                        :
+                        <View style={{ flex: 1, justifyContent: 'flex-end', }}>
+                            <View style={{ backgroundColor: color.background, height: 1, width: '100%' }}></View>
+                            <View style={{ alignSelf: 'center', flexDirection: 'row', marginVertical: 10 }}>
 
+                                <Text style={{ color: color.background }}>Don't have an accout? </Text>
+                                <TouchableOpacity onPress={() => this.props.navigation.navigate('RegisterScreen')}>
+                                    <Text style={{ fontWeight: 'bold', color: color.background }}>Register</Text>
+                                </TouchableOpacity>
+                            </View>
+                            <View style={{ backgroundColor: color.background, height: 1, width: '100%', marginBottom: 10 }}></View>
+                        </View>
+                }
 
             </KeyboardAvoidingView>
         );
