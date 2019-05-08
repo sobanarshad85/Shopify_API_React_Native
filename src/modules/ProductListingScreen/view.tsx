@@ -1,6 +1,6 @@
 //import liraries
 import React, { Component } from 'react';
-import { View, Text, StyleSheet, ScrollView, ActivityIndicator, TouchableWithoutFeedback, FlatList, Image } from 'react-native';
+import { View, Text, StyleSheet, ScrollView, ActivityIndicator, Dimensions, TouchableWithoutFeedback, FlatList, Image } from 'react-native';
 import color from '../../resources/colors'
 import Button from '../../components/Button'
 import styles from './style'
@@ -8,6 +8,10 @@ import { ListItem, Card } from "react-native-elements";
 import Search from 'react-native-search-box';
 import axios from 'axios'
 import ProductForFlatListSubScreen from './ProductForFlatListSubScreen'
+import Carousel from 'react-native-looped-carousel';
+const { width, height } = Dimensions.get('window');
+
+
 export interface Props {
 
 }
@@ -30,13 +34,22 @@ export default class ProductListingScreen extends React.Component<Props, State> 
         super(props);
 
         this.state = {
+            firstLoad: true,
             loading: false,
             data: [],
             page: 1,
             seed: 1,
             error: null,
-            refreshing: false
+            refreshing: false,
+            size: {
+                width, height: 200,
+            },
         };
+    }
+
+    _onLayoutDidChange = (e) => {
+        const layout = e.nativeEvent.layout;
+        this.setState({ size: { width: layout.width, height: layout.height } });
     }
 
     async componentDidMount() {
@@ -56,6 +69,7 @@ export default class ProductListingScreen extends React.Component<Props, State> 
         this.setState({
             data: data.data,
             loading: false,
+            firstLoad: false,
         }, () => console.log(this.state.data)
         )
 
@@ -108,6 +122,9 @@ export default class ProductListingScreen extends React.Component<Props, State> 
     // };
 
     renderSeparator = () => {
+        if (this.state.loading) return null
+
+
         return (
             <View
                 style={{
@@ -121,13 +138,52 @@ export default class ProductListingScreen extends React.Component<Props, State> 
     };
 
     renderHeader = () => {
-        // return  <Search
-        // ref="search_box"
-        /**
-        * There many props that can customizable
-        * Please scroll down to Props section
-        */
-        //   />
+
+
+        return <View style={{ backgroundColor: color.white, }} onLayout={this._onLayoutDidChange} >
+            <Carousel
+                delay={1500}
+                style={this.state.size}
+                autoplay
+                pageInfo
+                onAnimateNextPage={(p) => console.log(p)}
+            >
+
+                <Image
+                    style={this.state.size}
+                    source={{ uri: 'http://nutra-herbs.com/wp-content/uploads/2017/06/products.jpg' }}
+                    resizeMethod='auto'
+                    resizeMode='contain'
+                />
+                <Image
+                    style={this.state.size}
+                    source={{ uri: 'https://www.minutemaid.com/content/dam/minutemaidus/home/minute_maid_homepage_products_mobile.jpg' }}
+                    resizeMethod='auto'
+                    resizeMode='contain'
+                />
+
+                <Image
+                    style={this.state.size}
+                    source={{ uri: 'http://www.talentahead.com/img/Focus/CONSUMER-PRODUCTS.jpg' }}
+                    resizeMethod='auto'
+                    resizeMode='contain'
+                />
+                <Image
+                    style={this.state.size}
+                    source={{ uri: 'https://www.cadbury.co.za/sites/default/files/product-type-images/2017-12/image-2017-12-11-08-56-24-545.png' }}
+                    resizeMethod='auto'
+                    resizeMode='contain'
+                />
+                <Image
+                    style={this.state.size}
+                    source={{ uri: 'http://www.bluemaize.net/im/baby/baby-products-3.jpg' }}
+                    resizeMethod='auto'
+                    resizeMode='contain'
+                />
+
+
+            </Carousel>
+        </View>
     };
 
     renderFooter = () => {
@@ -148,7 +204,7 @@ export default class ProductListingScreen extends React.Component<Props, State> 
 
     render() {
         return (
-            <View style={{ borderTopWidth: 0, borderBottomWidth: 0, backgroundColor: color.foreground }}>
+            <View style={{ borderTopWidth: 0, borderBottomWidth: 0, backgroundColor: !this.state.firstLoad ? color.foreground : null }}>
                 <Search
                     // onChangeText={this.searchProduct}
                     // onSearch={this.searchProduct}
@@ -162,22 +218,23 @@ export default class ProductListingScreen extends React.Component<Props, State> 
                 // onCancel={this.clearSearch}
                 // onDelete={this.clearSearch}
                 />
-                <FlatList
+
+                {this.state.firstLoad ? <ActivityIndicator size="large" color={color.background} /> : <FlatList
                     data={this.state.data.products}
                     renderItem={({ item }) => (
 
 
 
-                        
-                            <ProductForFlatListSubScreen item={item} navigate={this.props.navigation.navigate} />
-                        
+
+                        <ProductForFlatListSubScreen item={item} navigate={this.props.navigation.navigate} />
+
 
 
 
                     )}
                     keyExtractor={item => item.id}
                     // ItemSeparatorComponent={this.renderSeparator}
-                    // ListHeaderComponent={this.renderHeader}
+                    ListHeaderComponent={this.renderHeader}
                     ListFooterComponent={this.renderFooter}
                     // onRefresh={this.handleRefresh}
                     refreshing={this.state.refreshing}
@@ -185,6 +242,8 @@ export default class ProductListingScreen extends React.Component<Props, State> 
                     onEndReachedThreshold={50}
                     numColumns={2}
                 />
+                }
+
             </View>
         );
     }

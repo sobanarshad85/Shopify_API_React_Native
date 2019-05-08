@@ -31,15 +31,14 @@ class ProductFOrFlatListSubSCreen extends React.Component<Props, State>  {
         }
     }
 
+
     componentWillMount() {
         this.setState({
             item: this.props.item
         })
     }
 
-    addToCart = (itemName) => {
-        console.warn(`${itemName} is added`)
-
+    addToCart = () => {
         this.setState({
             isCarted: !this.state.isCarted
         })
@@ -59,7 +58,7 @@ class ProductFOrFlatListSubSCreen extends React.Component<Props, State>  {
                 shadowRadius: 2,
                 elevation: 5,
             }}>
-                <TouchableWithoutFeedback onPress={() => navigate('ProductDetailScreen',{item:item})}>
+                <TouchableWithoutFeedback onPress={() => navigate('ProductDetailScreen', { item: item, addToCart: this.addToCart, isCarted: this.state.isCarted })}>
                     <View>
                         <Image
                             style={{ width: '100%', height: 200 }}
@@ -80,7 +79,7 @@ class ProductFOrFlatListSubSCreen extends React.Component<Props, State>  {
                 <View style={{ marginVertical: 5 }}>
                     <Button
                         onPress={() => this.addToCart(item.title)}
-                        iconDetails={{ name: 'shoppingcart', color: color.foreground, size: 24 }}
+                        iconDetails={{ name: !this.state.isCarted ? 'shoppingcart' : 'check', color: color.foreground, size: 24 }}
                         style={{ backgroundColor: color.background }}
                         textStyle={{ color: color.foreground, paddingVertical: 5, paddingHorizontal: 8 }}
                     >

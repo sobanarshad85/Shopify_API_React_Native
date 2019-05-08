@@ -7,8 +7,11 @@
  */
 
 import React, { Component } from 'react';
-import { Platform, StyleSheet, Text, View, ScrollView } from 'react-native';
+import { Platform, StyleSheet, Text, View, ScrollView, Dimensions } from 'react-native';
 import axios from 'axios'
+import Carousel from 'react-native-looped-carousel';
+
+const { width, height } = Dimensions.get('window');
 // import console = require('console');
 // import console = require('console');
 
@@ -28,8 +31,15 @@ export default class App extends Component<Props> {
     this.state = {
       data: null,
       loading: true,
+      size: {
+        width, height
+      },
     }
+  }
 
+  _onLayoutDidChange = (e) => {
+    const layout = e.nativeEvent.layout;
+    this.setState({ size: { width: layout.width, height: layout.height } });
   }
 
   async componentDidMount() {
@@ -63,6 +73,22 @@ export default class App extends Component<Props> {
     return (
       <View style={styles.container}>
         <ScrollView>
+          <View style={{ flex: 1 }} onLayout={this._onLayoutDidChange}>
+            <Carousel
+              delay={2000}
+              style={this.state.size}
+              autoplay
+              pageInfo
+              onAnimateNextPage={(p) => console.log(p)}
+            >
+              <View style={[{ backgroundColor: '#BADA55' }, this.state.size]}><Text>1asdf</Text></View>
+              <View style={[{ backgroundColor: 'red' }, this.state.size]}><Text>2asdf</Text></View>
+              {/* <View style={[{ backgroundColor: 'blue' }, this.state.size]}><Text>3</Text></View> */}
+            </Carousel>
+          </View>
+
+
+
           <Text style={styles.welcome}>Welcome to React Native!</Text>
           {
             !loading ?

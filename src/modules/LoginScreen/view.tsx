@@ -39,9 +39,9 @@ class LoginScreen extends React.Component<Props, State> {
 
             <KeyboardAvoidingView behavior="height" style={{ flex: 1, backgroundColor: color.foreground, flexDirection: 'column' }}>
 
-                <View style={{ flex: 1 ,justifyContent:'center',alignItems:'center'}}>
+                <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
                     <Image
-                        style={{ width: 250, height: 250 }}
+                        style={{ width: 150, height: 150, borderRadius: 20 }}
                         source={{ uri: 'https://facebook.github.io/react-native/docs/assets/favicon.png' }}
                     />
                 </View>
@@ -53,7 +53,7 @@ class LoginScreen extends React.Component<Props, State> {
                         onSubmit={(values, actions) => {
                             this.setState({
                                 email: values.email,
-                                password: values.password
+                                password: values.password,
                             })
                             setTimeout(() => {
                                 AuthCheckScreen.token = true
@@ -140,6 +140,7 @@ class LoginScreen extends React.Component<Props, State> {
                  */}
 
 
+
                 <View style={{ flex: 1, justifyContent: 'flex-end', }}>
                     <View style={{ backgroundColor: color.background, height: 1, width: '100%' }}></View>
                     <View style={{ alignSelf: 'center', flexDirection: 'row', marginVertical: 10 }}>
@@ -151,6 +152,8 @@ class LoginScreen extends React.Component<Props, State> {
                     </View>
                     <View style={{ backgroundColor: color.background, height: 1, width: '100%', marginBottom: 10 }}></View>
                 </View>
+
+
 
             </KeyboardAvoidingView>
         );
