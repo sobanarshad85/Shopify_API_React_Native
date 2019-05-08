@@ -8,9 +8,16 @@ import { Formik, Field } from 'formik'
 import * as yup from 'yup'
 import Button from '../../components/Button'
 // create a component
+
+export interface Props {
+
+}
+
+export interface State { }
+
 class ForgotPasswordScreen extends React.Component<Props, State>  {
 
-    static navigationOptions = ({ navigation }) => {
+    static navigationOptions = () => {
         return {
             title: 'Forgot Password',
             headerTitleStyle: {

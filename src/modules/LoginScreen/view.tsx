@@ -10,17 +10,19 @@ import { Formik, Field } from 'formik'
 import * as yup from 'yup'
 import Button from '../../components/Button'
 
-export interface Props {
 
+export interface Props {
+navigation:any
 }
 
 export interface State {
     email: string;
     password: string;
+    signingIn: boolean;
 }
 // create a component
 class LoginScreen extends React.Component<Props, State> {
-    static navigationOptions = ({ navigation }) => {
+    static navigationOptions = () => {
         return {
             title: 'Login',
             headerTitleStyle: {
@@ -34,9 +36,11 @@ class LoginScreen extends React.Component<Props, State> {
         }
     };
 
-    constructor() {
-        super();
+    constructor(props: any) {
+        super(props);
         this.state = {
+            email: '',
+            password: '',
             signingIn: false,
         }
     }
@@ -61,7 +65,7 @@ class LoginScreen extends React.Component<Props, State> {
                             this.setState({
                                 email: values.email,
                                 password: values.password,
-                                signingIn:true
+                                signingIn: true
                             })
                             setTimeout(() => {
                                 AuthCheckScreen.token = true

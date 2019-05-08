@@ -5,8 +5,11 @@ import color from '../../resources/colors'
 import styles from './style'
 import AuthCheckScreen from '../AuthCheckScreen/view'
 
+export interface Props{
+    navigation:any;
+}
 // create a component
-class CategoriesScreen extends Component {
+class CategoriesScreen extends Component<Props> {
     render() {
         return (
             <View style={styles.container}>

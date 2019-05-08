@@ -5,6 +5,7 @@ import color from '../../resources/colors'
 import styles from './style'
 import * as controller from './controller'
 import strings from '../../resources/constants'
+// import { any } from 'prop-types';
 
 
 // create a component
