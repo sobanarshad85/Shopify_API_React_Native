@@ -114,10 +114,10 @@ class ProductDetailScreen extends React.Component<Props, State>  {
                         <View style={{ backgroundColor: color.white, marginBottom: 10, marginRight: 10, marginLeft: 10 }}>
                             <View style={{ flex: 1, flexDirection: 'row', backgroundColor: color.background, }}>
                                 <View style={{ marginLeft: 5 }}>
-                                    <Text style={{ color: color.foreground, fontSize: 20 }}>{item.title}</Text>
+                                    <Text style={{ color: color.foreground, fontSize: 20,padding:5 }}>{item.title}</Text>
                                 </View>
                             </View>
-                            <View style={{ padding: 5 }}>
+                            <View style={{ padding: 6 }}>
                                 <View style={{ flexDirection: 'row' }}>
                                     <Text style={{ color: color.background, fontSize: 18, flex: 1 }}>Price: </Text>
                                     <Text style={{ color: color.background, fontSize: 20, flex: 1 }}>{item.variants[0].price}</Text>
@@ -154,11 +154,11 @@ class ProductDetailScreen extends React.Component<Props, State>  {
                         <View style={{ backgroundColor: color.white, marginBottom: 10, marginRight: 10, marginLeft: 10 }}>
                             <View style={{ flex: 1, flexDirection: 'row', backgroundColor: color.background, }}>
                                 <View style={{ marginLeft: 5 }}>
-                                    <Text style={{ color: color.foreground, fontSize: 20 }}>Description</Text>
+                                    <Text style={{ color: color.foreground, fontSize: 20,padding:5 }}>Description</Text>
                                 </View>
 
                             </View>
-                            <View style={{ padding: 5 }}>
+                            <View style={{ padding: 6 }}>
                                 <Text style={{ color: color.gray }}>This is Beauty Product {'\n'}
                                     Ladies and Gents both can have this {'\n'}
                                     Extensively tested by our Makers{'\n'}
