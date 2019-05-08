@@ -20,7 +20,6 @@ class ForgotPasswordScreen extends React.Component<Props, State>  {
             headerStyle: {
                 backgroundColor: color.background,
             },
-            
         }
     };
     render() {
@@ -29,75 +28,75 @@ class ForgotPasswordScreen extends React.Component<Props, State>  {
 
 
 
-            <View style={{ flex: 1, justifyContent: 'center' }}>
+                <View style={{ flex: 1, justifyContent: 'center' }}>
 
-                <Formik
-                    initialValues={{ email: '', }}
-                    onSubmit={(values, actions) => {
-                        this.setState({
-                            email: values.email,
-                        })
-                        setTimeout(() => {
+                    <Formik
+                        initialValues={{ email: '', }}
+                        onSubmit={(values, actions) => {
+                            this.setState({
+                                email: values.email,
+                            })
+                            setTimeout(() => {
 
-                        }, 1000);
+                            }, 1000);
 
-                        alert(JSON.stringify(values));
+                            alert(JSON.stringify(values));
 
-                        setTimeout(() => {
-                            actions.setSubmitting(false)
+                            setTimeout(() => {
+                                actions.setSubmitting(false)
 
-                        }, 1000);
+                            }, 1000);
 
-                    }}
-                    validationSchema={yup.object().shape({
-                        email: yup
-                            .string()
-                            .email()
-                            .required(),
-                    })}
+                        }}
+                        validationSchema={yup.object().shape({
+                            email: yup
+                                .string()
+                                .email()
+                                .required(),
+                        })}
 
-                >
-                    {({ values, handleChange, errors, isSubmitting, setFieldTouched, touched, isValid, handleSubmit }) => (
-                        <Fragment>
-                          
-                            <Item floatingLabel style={{ marginTop: 5 }}>
-                                <Label style={{ color: color.background }}>Enter Your Email</Label>
-                                <Input
-                                    style={{ color: color.background }}
-                                    value={values.email}
-                                    onChangeText={handleChange('email')}
-                                    onBlur={() => setFieldTouched('email')}
-                                    keyboardType='email-address'
-                                />
-                            </Item>
-                            {touched.email && errors.email &&
-                                <Text style={{ fontSize: 10, color: 'red' }}>{errors.email}</Text>
-                            }
+                    >
+                        {({ values, handleChange, errors, isSubmitting, setFieldTouched, touched, isValid, handleSubmit }) => (
+                            <Fragment>
 
-                            {
-                                isSubmitting ?
-                                    <View style={{ marginTop: 10 }}>
-                                        <ActivityIndicator color={color.background} size='large' />
-                                    </View>
-                                    :
-                                    <Button
-                                        disabled={!isValid}
-                                        onPress={handleSubmit}
-                                        style={{ backgroundColor: color.background, marginTop: 10, }}
-                                        textStyle={{ color: color.foreground, paddingHorizontal: 27, paddingVertical: 12 }}
-                                    >
-                                        Submit
+                                <Item floatingLabel style={{ marginTop: 5 }}>
+                                    <Label style={{ color: color.background }}>Enter Your Email</Label>
+                                    <Input
+                                        style={{ color: color.background }}
+                                        value={values.email}
+                                        onChangeText={handleChange('email')}
+                                        onBlur={() => setFieldTouched('email')}
+                                        keyboardType='email-address'
+                                    />
+                                </Item>
+                                {touched.email && errors.email &&
+                                    <Text style={{ fontSize: 10, color: 'red' }}>{errors.email}</Text>
+                                }
+
+                                {
+                                    isSubmitting ?
+                                        <View style={{ marginTop: 10 }}>
+                                            <ActivityIndicator color={color.background} size='large' />
+                                        </View>
+                                        :
+                                        <Button
+                                            disabled={!isValid}
+                                            onPress={handleSubmit}
+                                            style={{ backgroundColor: color.background, marginTop: 10, }}
+                                            textStyle={{ color: color.foreground, paddingHorizontal: 27, paddingVertical: 12 }}
+                                        >
+                                            Submit
                                 </Button>
-                            }
-                        </Fragment>
-                    )}
-                </Formik>
+                                }
+                            </Fragment>
+                        )}
+                    </Formik>
 
 
 
-            </View>
+                </View>
 
-        </KeyboardAvoidingView>
+            </KeyboardAvoidingView>
         );
     }
 }

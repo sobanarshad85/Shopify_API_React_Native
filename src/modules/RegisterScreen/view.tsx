@@ -13,17 +13,11 @@ export interface Props {
 
 }
 
-export interface State {
-    userName: string,
-    email: string;
-    password: string;
-    contactNumber: number;
-}
 
 // create a component
-class RegisterScreen extends React.Component<Props, State> {
+class RegisterScreen extends React.Component<Props> {
 
-    static navigationOptions = ({ navigation }) => {
+    static navigationOptions = () => {
         return {
             title: 'Register Your Self',
             headerTitleStyle: {
@@ -36,11 +30,10 @@ class RegisterScreen extends React.Component<Props, State> {
 
         }
     };
+
     render() {
         return (
             <KeyboardAvoidingView behavior="height" style={{ flex: 1, backgroundColor: color.foreground, flexDirection: 'column' }}>
-
-
 
                 <View style={{ flex: 1, justifyContent: 'center' }}>
 
@@ -159,16 +152,7 @@ class RegisterScreen extends React.Component<Props, State> {
                         )}
                     </Formik>
 
-
-
                 </View>
-                {/* <View style={{marginVertical:20}}>
-            <Button onPress={() => this.props.navigation.navigate('ForgotPasswordScreen')}>Forgot Password</Button>
-            </View>
-            <Button onPress={() => this.props.navigation.navigate('RegisterScreen')} >Register</Button>
-             */}
-
-
 
             </KeyboardAvoidingView>
         );

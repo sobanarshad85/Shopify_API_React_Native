@@ -8,10 +8,32 @@ import Button from '../../components/Button'
 
 const { width, height } = Dimensions.get('window');
 
-// create a component
-class ProductDetailScreen extends Component {
 
-    static navigationOptions = ({ navigation }) => {
+export interface Props {
+    navigation: any;
+}
+
+interface Size {
+    width: number;
+    height: number;
+}
+
+interface Size {
+    width: number;
+    height: number
+}
+
+export interface State {
+    isCarted: boolean;
+    firstLoad: boolean;
+    size: Size
+}
+
+
+// create a component
+class ProductDetailScreen extends React.Component<Props, State>  {
+
+    static navigationOptions = ({ navigation }: any) => {
         return {
             title: `${navigation.state.params.item.title}`,
             headerTitleStyle: {
@@ -25,8 +47,8 @@ class ProductDetailScreen extends Component {
         }
     };
 
-    constructor() {
-        super();
+    constructor(props: any) {
+        super(props);
         this.state = {
             isCarted: false,
             firstLoad: true,
@@ -48,7 +70,7 @@ class ProductDetailScreen extends Component {
         })
     }
 
-    _onLayoutDidChange = (e) => {
+    _onLayoutDidChange = (e: any) => {
         const layout = e.nativeEvent.layout;
         this.setState({ size: { width: layout.width, height: layout.height } });
     }
@@ -70,11 +92,11 @@ class ProductDetailScreen extends Component {
                                 style={this.state.size}
                                 autoplay
                                 pageInfo
-                                onAnimateNextPage={(p) => console.log(p)}
+                                onAnimateNextPage={(p: any) => console.log(p)}
                             >
 
                                 {
-                                    item.images.map((img, key) => {
+                                    item.images.map((img: any, key: number) => {
                                         return (
                                             <Image
                                                 key={key}

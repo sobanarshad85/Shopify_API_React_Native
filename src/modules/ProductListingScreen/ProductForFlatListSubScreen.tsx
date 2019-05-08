@@ -7,24 +7,25 @@ import styles from './style'
 import { ListItem, Card } from "react-native-elements";
 import Search from 'react-native-search-box';
 import axios from 'axios'
-// import { State } from 'react-native-gesture-handler';
 
 type Item = {
 
 }
 
 export interface Props {
-    item: Item
+    item: any;
+    navigate: any;
 }
 
 export interface State {
-
+    item: any;
+    isCarted: boolean;
 }
 // create a component
 class ProductFOrFlatListSubSCreen extends React.Component<Props, State>  {
 
-    constructor() {
-        super();
+    constructor(props: any) {
+        super(props);
         this.state = {
             item: null,
             isCarted: false
@@ -78,7 +79,7 @@ class ProductFOrFlatListSubSCreen extends React.Component<Props, State>  {
                 </TouchableWithoutFeedback>
                 <View style={{ marginVertical: 5 }}>
                     <Button
-                        onPress={() => this.addToCart(item.title)}
+                        onPress={() => this.addToCart()}
                         iconDetails={{ name: !this.state.isCarted ? 'shoppingcart' : 'check', color: color.foreground, size: 24 }}
                         style={{ backgroundColor: color.background }}
                         textStyle={{ color: color.foreground, paddingVertical: 5, paddingHorizontal: 8 }}

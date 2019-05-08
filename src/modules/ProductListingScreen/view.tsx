@@ -9,11 +9,17 @@ import Search from 'react-native-search-box';
 import axios from 'axios'
 import ProductForFlatListSubScreen from './ProductForFlatListSubScreen'
 import Carousel from 'react-native-looped-carousel';
+import { any } from 'prop-types';
 const { width, height } = Dimensions.get('window');
 
 
 export interface Props {
+navigation:any
+}
 
+interface Size {
+    width: number;
+    height: number;
 }
 
 export interface State {
@@ -23,6 +29,8 @@ export interface State {
     seed: number;
     error: any;
     refreshing: boolean;
+    firstLoad: boolean;
+    size: Size
 }
 
 // create a component
@@ -30,7 +38,7 @@ export default class ProductListingScreen extends React.Component<Props, State> 
     static navigationOptions = {
         header: null
     }
-    constructor(props) {
+    constructor(props: any) {
         super(props);
 
         this.state = {
@@ -47,7 +55,7 @@ export default class ProductListingScreen extends React.Component<Props, State> 
         };
     }
 
-    _onLayoutDidChange = (e) => {
+    _onLayoutDidChange = (e:any) => {
         const layout = e.nativeEvent.layout;
         this.setState({ size: { width: layout.width, height: layout.height } });
     }
@@ -55,7 +63,7 @@ export default class ProductListingScreen extends React.Component<Props, State> 
     async componentDidMount() {
         // this.makeRemoteRequest();
 
-        let url = 'https://244c0529492d9a4f0608ee6819bea9cf:cddc810af568275df91c62bde72ccdce@kwanso-soban.myshopify.com/admin/api/2019-04/products.json'
+        const url = 'https://244c0529492d9a4f0608ee6819bea9cf:cddc810af568275df91c62bde72ccdce@kwanso-soban.myshopify.com/admin/api/2019-04/products.json'
 
         const data = await axios({
             method: 'get',
@@ -140,13 +148,13 @@ export default class ProductListingScreen extends React.Component<Props, State> 
     renderHeader = () => {
 
 
-        return <View style={{ backgroundColor: color.white, flex:1}} onLayout={this._onLayoutDidChange} >
+        return <View style={{ backgroundColor: color.white, flex: 1 }} onLayout={this._onLayoutDidChange} >
             <Carousel
                 delay={1500}
                 style={this.state.size}
                 autoplay
                 pageInfo
-                onAnimateNextPage={(p) => console.log(p)}
+                onAnimateNextPage={(p:any) => console.log(p)}
             >
 
                 <Image
