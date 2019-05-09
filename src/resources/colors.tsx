@@ -2,8 +2,11 @@ var color: Color = {
     white: 'white',
     black: 'black',
     gray: 'gray',
-    background: "#755287",
-    foreground: "#E3DCE7"
+    
+    background: "#551422",
+    foreground: "#f1dce1",
+    background1: "#e57659",
+    foreground1: "#white"
 }
 
 interface Color {
@@ -12,6 +15,8 @@ interface Color {
     gray: string;
     background: string;
     foreground: string;
+    background1: string;
+    foreground1: string;
 }
 
 export default color;
