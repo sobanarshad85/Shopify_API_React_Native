@@ -7,9 +7,12 @@ import * as controller from './controller'
 import strings from '../../resources/constants'
 // import { any } from 'prop-types';
 
+export interface Props {
+    navigation:any
+    }
 
 // create a component
-class AuthCheckScreen extends Component {
+class AuthCheckScreen extends React.Component<Props> {
     static token: Boolean = false;
     componentDidMount() {
         setTimeout(() => {
