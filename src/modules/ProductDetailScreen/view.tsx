@@ -119,16 +119,16 @@ class ProductDetailScreen extends React.Component<Props, State>  {
                             </View>
                             <View style={{ padding: 6 }}>
                                 <View style={{ flexDirection: 'row' }}>
-                                    <Text style={{ color: color.background, fontSize: 18, flex: 1 }}>Price: </Text>
+                                    <Text style={styles.textStyle}>Price: </Text>
                                     <Text style={{ color: color.background, fontSize: 20, flex: 1 }}>{item.variants[0].price}</Text>
                                 </View>
                                 <View style={{ flexDirection: 'row' }}>
-                                    <Text style={{ color: color.background, fontSize: 16, flex: 1 }}>Weight: </Text>
-                                    <Text style={{ color: color.background, fontSize: 18, flex: 1 }}>{`${item.variants[0].weight} ${item.variants[0].weight_unit}`}</Text>
+                                    <Text style={styles.textStyle1}>Weight: </Text>
+                                    <Text style={styles.textStyle}>{`${item.variants[0].weight} ${item.variants[0].weight_unit}`}</Text>
                                 </View>
                                 <View style={{ flexDirection: 'row' }}>
-                                    <Text style={{ color: color.background, fontSize: 16, flex: 1 }}>In Stock: </Text>
-                                    <Text style={{ color: color.background, fontSize: 18, flex: 1 }}>{`${item.variants[0].inventory_quantity}`}</Text>
+                                    <Text style={styles.textStyle1}>In Stock: </Text>
+                                    <Text style={styles.textStyle}>{`${item.variants[0].inventory_quantity}`}</Text>
                                 </View>
                             </View>
                             <View style={{ marginVertical: 5 }}>

@@ -8,9 +8,6 @@ import { ListItem, Card } from "react-native-elements";
 import Search from 'react-native-search-box';
 import axios from 'axios'
 
-type Item = {
-
-}
 
 export interface Props {
     item: any;
@@ -31,7 +28,6 @@ class ProductFOrFlatListSubSCreen extends React.Component<Props, State>  {
             isCarted: false
         }
     }
-
 
     componentWillMount() {
         this.setState({
@@ -71,8 +67,8 @@ class ProductFOrFlatListSubSCreen extends React.Component<Props, State>  {
                         <View>
                             <Text style={{ color: color.background, alignSelf: 'center', fontWeight: 'bold' }}>{item.title}</Text>
                             <View style={{ flexDirection: 'row', marginLeft: 5 }}>
-                                <Text style={{ color: color.background }} >Price: </Text>
-                                <Text style={{ color: color.background }}>{item.variants[0].price}</Text>
+                                <Text style={styles.textColor} >Price: </Text>
+                                <Text style={styles.textColor}>{item.variants[0].price}</Text>
                             </View>
                         </View>
                     </View>

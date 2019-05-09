@@ -8,6 +8,9 @@ import color from '../../resources/colors'
         alignItems: 'center',
         backgroundColor: color.white,
     },
+    textColor:{ 
+        color: color.background 
+    }
 });
 
 export default styles;

@@ -3,7 +3,7 @@ import React, { Component } from 'react';
 import { View, Text, StyleSheet, TouchableOpacity } from 'react-native';
 import Icon from 'react-native-vector-icons/AntDesign'
 
-export interface iconDetails {
+ interface IconDetails {
     name?: string;
     size?: number;
     color?: string;
@@ -15,7 +15,8 @@ export interface Props {
     onPress?: () => void | string;
     disabled?: boolean;
     disabledColor?: string;
-    iconDetails?: iconDetails;
+    iconDetails?: IconDetails;
+    children?:string
 }
 
 // create a component

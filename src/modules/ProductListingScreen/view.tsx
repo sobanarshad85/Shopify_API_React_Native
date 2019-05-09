@@ -214,30 +214,19 @@ export default class ProductListingScreen extends React.Component<Props, State> 
         return (
             <View style={{ borderTopWidth: 0, borderBottomWidth: 0, backgroundColor: !this.state.firstLoad ? color.foreground : null }}>
                 <Search
-                    // onChangeText={this.searchProduct}
-                    // onSearch={this.searchProduct}
                     backgroundColor='white'
                     cancelButtonTextStyle={{ color: color.background }}
                     tintColorDelete={color.background}
                     tintColorSearch={color.background}
                     placeholderTextColor={color.background}
-                    // onChangeText={this.searchProduct}
                     blurOnSubmit={true}
-                // onCancel={this.clearSearch}
-                // onDelete={this.clearSearch}
                 />
 
                 {this.state.firstLoad ? <ActivityIndicator size="large" color={color.background} /> : <FlatList
                     data={this.state.data.products}
                     renderItem={({ item }) => (
 
-
-
-
                         <ProductForFlatListSubScreen item={item} navigate={this.props.navigation.navigate} />
-
-
-
 
                     )}
                     keyExtractor={item => item.id}
