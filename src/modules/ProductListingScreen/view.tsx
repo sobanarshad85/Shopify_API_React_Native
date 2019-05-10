@@ -13,7 +13,6 @@ import { any } from 'prop-types';
 const { width, height } = Dimensions.get('window');
 
 
-
 export interface Props {
 navigation:any;
 

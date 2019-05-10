@@ -10,6 +10,7 @@ import ProductListingScreen from '../ProductListingScreen/view'
 import ProductDetailScreen from '../ProductDetailScreen/view';
 import Entypo from 'react-native-vector-icons/Entypo';
 import color from '../../resources/colors'
+import CartScreen from '../cart/view'
 
 
 const ProductScreens = createStackNavigator({
@@ -24,7 +25,7 @@ const AppStack = createBottomTabNavigator({
         screen: CategoriesScreen,
         navigationOptions: {
             tabBarLabel: 'Categories',
-            tabBarIcon: ({ tintColor }) => (
+            tabBarIcon: ({ tintColor }:any) => (
                 <Entypo
                     reverse
                     name='home'
@@ -39,10 +40,25 @@ const AppStack = createBottomTabNavigator({
         screen: ProductScreens,
         navigationOptions: {
             tabBarLabel: 'Products',
-            tabBarIcon: ({ tintColor }) => (
+            tabBarIcon: ({ tintColor }:any) => (
                 <Entypo
                     reverse
                     name='archive'
+                    type='font-awesome'
+                    color={tintColor}
+                    size={iconSize}
+                />
+            )
+        }
+    },
+    CartScreen: {
+        screen: CartScreen,
+        navigationOptions: {
+            tabBarLabel: 'Cart',
+            tabBarIcon: ({ tintColor }:any) => (
+                <Entypo
+                    reverse
+                    name='shopping-cart'
                     type='font-awesome'
                     color={tintColor}
                     size={iconSize}

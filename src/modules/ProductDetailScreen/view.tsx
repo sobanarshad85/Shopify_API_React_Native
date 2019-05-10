@@ -1,10 +1,12 @@
 //import liraries
 import React, { Component } from 'react';
-import { View, Text, StyleSheet, ScrollView, Image, Dimensions, ActivityIndicator } from 'react-native';
+import { View, Text, StyleSheet, ScrollView, Image, Dimensions, ActivityIndicator, TouchableOpacity } from 'react-native';
 import color from '../../resources/colors'
 import styles from './style'
 import Carousel from 'react-native-looped-carousel';
 import Button from '../../components/Button'
+import Ant from 'react-native-vector-icons/AntDesign'
+
 
 const { width, height } = Dimensions.get('window');
 
@@ -43,7 +45,18 @@ class ProductDetailScreen extends React.Component<Props, State>  {
             headerStyle: {
                 backgroundColor: color.background,
             },
+            headerRight: (
+                <View style={{ marginRight: 20 }}>
+                    <TouchableOpacity onPress={navigation.getParam('captureScreen')}>
+                        <Ant
 
+                            name='shoppingcart'
+                            size={27}
+                            color={color.foreground}
+                        />
+                    </TouchableOpacity>
+                </View>
+            ),
         }
     };
 
@@ -57,11 +70,17 @@ class ProductDetailScreen extends React.Component<Props, State>  {
             },
         }
     }
+    captureScreen = () => {
+        this.props.navigation.navigate('CartScreen')
+
+    }
 
     componentDidMount() {
         this.setState({
             firstLoad: false
         })
+        this.props.navigation.setParams({ captureScreen: this.captureScreen });
+
     }
 
     componentWillMount() {
@@ -114,7 +133,7 @@ class ProductDetailScreen extends React.Component<Props, State>  {
                         <View style={{ backgroundColor: color.white, marginBottom: 10, marginRight: 10, marginLeft: 10 }}>
                             <View style={{ flex: 1, flexDirection: 'row', backgroundColor: color.background, }}>
                                 <View style={{ marginLeft: 5 }}>
-                                    <Text style={{ color: color.foreground, fontSize: 20,padding:5 }}>{item.title}</Text>
+                                    <Text style={{ color: color.foreground, fontSize: 20, padding: 5 }}>{item.title}</Text>
                                 </View>
                             </View>
                             <View style={{ padding: 6 }}>
@@ -154,7 +173,7 @@ class ProductDetailScreen extends React.Component<Props, State>  {
                         <View style={{ backgroundColor: color.white, marginBottom: 10, marginRight: 10, marginLeft: 10 }}>
                             <View style={{ flex: 1, flexDirection: 'row', backgroundColor: color.background, }}>
                                 <View style={{ marginLeft: 5 }}>
-                                    <Text style={{ color: color.foreground, fontSize: 20,padding:5 }}>Description</Text>
+                                    <Text style={{ color: color.foreground, fontSize: 20, padding: 5 }}>Description</Text>
                                 </View>
 
                             </View>
