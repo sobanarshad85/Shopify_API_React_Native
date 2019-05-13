@@ -13,7 +13,7 @@ export interface Props {
 
 // create a component
 class AuthCheckScreen extends React.Component<Props> {
-    static token: Boolean = true;
+    static token: boolean = true;
     componentDidMount() {
         setTimeout(() => {
             controller.authChecking(AuthCheckScreen.token, this.props.navigation)

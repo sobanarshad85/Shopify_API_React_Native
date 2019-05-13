@@ -64,8 +64,8 @@ class CartScreen extends React.Component<Props, State>  {
 
     }
 
-    outOfCart = (id) => {
-        const newData = this.state.data.products.filter(product => product.id !== id)
+    outOfCart = (id: number) => {
+        const newData = this.state.data.products.filter((product: any) => product.id !== id)
         const stateData = this.state.data
         stateData.products = newData
         this.setState({
@@ -75,12 +75,12 @@ class CartScreen extends React.Component<Props, State>  {
     }
 
     totalPrice = () => {
-        const array = this.state.data.products.map((pro) => {
+        const array = this.state.data.products.map((pro:any) => {
             return (
                 parseInt(pro.variants[0].price)
             )
         })
-        const totalAmount = array.reduce((acc, currentValue = 0) => acc + currentValue)
+        const totalAmount = array.reduce((acc:number, currentValue:number = 0) => acc + currentValue)
 
         return `Total Price: ${totalAmount}`
     }
