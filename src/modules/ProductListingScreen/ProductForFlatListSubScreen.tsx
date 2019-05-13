@@ -24,16 +24,16 @@ class ProductFOrFlatListSubSCreen extends React.Component<Props, State>  {
     constructor(props: any) {
         super(props);
         this.state = {
-            item: null,
+            item: this.props.item,
             isCarted: false
         }
     }
 
-    componentWillMount() {
-        this.setState({
-            item: this.props.item
-        })
-    }
+    // componentWillMount() {
+    //     this.setState({
+    //         item: this.props.item
+    //     })
+    // }
 
     addToCart = () => {
         this.setState({

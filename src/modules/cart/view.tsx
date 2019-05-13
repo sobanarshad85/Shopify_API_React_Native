@@ -6,8 +6,8 @@ import Icon from 'react-native-vector-icons/AntDesign'
 import color from '../../resources/colors';
 import axios from 'axios'
 import Button from '../../components/Button'
-import ProductDetailScreen from '../ProductDetailScreen/view';
-
+import CartItem from './cartSingleItem'
+import Modal from '../../components/Modal'
 
 export interface Props {
     navigation: any
@@ -21,7 +21,7 @@ export interface State {
     seed: number;
     error: any;
     refreshing: boolean;
-
+    openModal: boolean;
 }
 // create a component
 class CartScreen extends React.Component<Props, State>  {
@@ -37,6 +37,7 @@ class CartScreen extends React.Component<Props, State>  {
             seed: 1,
             error: null,
             refreshing: false,
+            openModal: false
         };
     }
 
@@ -84,6 +85,11 @@ class CartScreen extends React.Component<Props, State>  {
         return `Total Price: ${totalAmount}`
     }
 
+    hideModal = () => {
+        this.setState({
+            openModal: false,
+        })
+    }
 
     render() {
         const { products } = this.state.data
@@ -93,82 +99,45 @@ class CartScreen extends React.Component<Props, State>  {
             this.state.firstLoad ? <ActivityIndicator size="large" color={color.background} /> :
                 <ScrollView style={{ backgroundColor: color.foreground, }}>
                     <View style={{ marginTop: 10, flexDirection: 'row', justifyContent: 'center', alignItems: 'flex-start' }}>
-                        <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center', marginLeft: 10 }}>
-                            <Text style={{ backgroundColor: color.background, borderRadius: 5, color: color.foreground, fontSize: 15, paddingHorizontal: 10, paddingVertical: 13, }}>{this.totalPrice()}</Text>
-                        </View>
+                        {/* <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center', marginLeft: 10 }}>
+                            <Text style={{ backgroundColor: color.background, borderRadius: 5, color: color.foreground, fontSize: 15, paddingHorizontal: 10, paddingVertical: 13, fontWeight:'bold'}}>{this.totalPrice()}</Text>
+                        </View> */}
                         <View style={{ flex: 1, marginRight: 10, justifyContent: 'center', alignItems: 'flex-end' }}>
                             <Button style={{ backgroundColor: color.background }}
                                 textStyle={{ color: color.foreground }}
-                                onPress={()=>console.warn('Cart Checkout')}
-                                iconDetails={{ color: color.foreground,name:'shoppingcart' }}>
+                                onPress={() => this.setState({ openModal: true })}
+                                iconDetails={{ color: color.foreground, name: 'shoppingcart' }}>
                                 Checkout
                                 </Button>
                         </View>
+                        <Modal
+                            visible={this.state.openModal}
+                            dismiss={() => this.hideModal()}
+                            animationType='fade-in'
+                        >
+                            <View style={{ justifyContent: 'flex-start', backgroundColor: 'white', width: '80%', borderRadius: 20 }}>
+
+                                <View style={{ backgroundColor: color.foreground }}>
+                                    <View style={{ backgroundColor: color.background, }}>
+                                        <Text style={{ color: color.foreground, fontSize: 18, fontWeight: 'bold', alignSelf: 'center', paddingVertical: 5 }}>Checkout Cart</Text>
+                                    </View>
+                                    <View style={{ marginTop: 5 }}>
+                                        <Text style={{ color: color.gray, fontSize: 16 }}>Total Price: 5698</Text>
+                                    </View>
+                                    <View style={{ marginVertical: 5 }}>
+                                        <Button style={{ backgroundColor: color.background }}
+                                            onPress={this.hideModal}
+                                            textStyle={{ color: color.foreground, paddingVertical: 6, paddingHorizontal: 20 }}>Done</Button>
+                                    </View>
+                                </View>
+                            </View>
+                        </Modal>
                     </View>
                     <View style={{ marginVertical: 5, }}>
                         {
-                            products.map((item, index) => {
+                            products.map((item: any, index: number) => {
                                 return (
-                                    <View style={{ flex: 1, flexDirection: 'row', backgroundColor: color.white, marginHorizontal: 10, marginVertical: 5 }} key={index}>
-                                        <View>
-                                            <View>
-                                                <Image
-                                                    style={{ width: 120, height: 120 }}
-                                                    source={{ uri: item.image.src }}
-                                                    resizeMethod='auto'
-                                                    resizeMode='contain'
-                                                />
-                                            </View>
-                                        </View>
-                                        <View style={{ height: '100%', width: 1, backgroundColor: color.foreground, opacity: 0.8 }}></View>
-                                        <View style={{ flex: 1 }}>
-                                            <View style={{ backgroundColor: color.background, width: '100%', flexDirection: 'row' }}>
-                                                <View style={{ justifyContent: 'flex-start', flex: 1 }}>
-                                                    <Text style={{ padding: 5, color: color.foreground, fontSize: 18 }}>{item.title}</Text>
-                                                </View>
-                                                <View style={{ marginRight: 10, justifyContent: 'center', alignItems: 'flex-end' }}>
-                                                    <TouchableOpacity onPress={() => this.outOfCart(item.id)} >
-                                                        <Icon
-                                                            name="close"
-                                                            color={color.foreground}
-                                                            size={25}
-                                                        />
-                                                    </TouchableOpacity>
-                                                </View>
-                                            </View>
-                                            <View style={{ flexDirection: 'row' }}>
-                                                <Text style={{ padding: 5, color: color.background, fontSize: 18 }}>Price:</Text>
-                                                <Text style={{ padding: 5, color: color.background, fontSize: 18 }}>{item.variants[0].price}</Text>
-                                            </View>
-                                            <View style={{ flexDirection: 'row', justifyContent: 'flex-end', marginRight: 10 }}>
-                                                <View style={{ height: 30, width: 30, borderRadius: 15, backgroundColor: color.background, justifyContent: 'center', alignItems: 'center' }}>
-                                                    <Icon
-                                                        size={25}
-                                                        color={color.foreground}
-                                                        name="minus"
-                                                    />
-                                                </View>
-                                                <Text style={{ marginHorizontal: 5, color: color.gray, fontSize: 20 }}>15</Text>
-                                                <View style={{ height: 30, width: 30, borderRadius: 15, backgroundColor: color.background, justifyContent: 'center', alignItems: 'center' }}>
-                                                    <Icon
-                                                        size={25}
-                                                        color={color.foreground}
-                                                        name="plus"
-                                                    />
-                                                </View>
-                                            </View>
-
-                                            {/* <View>
-                                            <View style={{backgroundColor:color.background,width:'100%',flex:1}}>
-                                           
-                                            </View>
-                                            
-                                        </View>
-                                        <View>
-                                            
-                                        </View> */}
-                                        </View>
-                                    </View>
+                                    <CartItem item={item} outOfCart={this.outOfCart} key={index} />
                                 )
                             })
                         }
