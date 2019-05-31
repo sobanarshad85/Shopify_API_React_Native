@@ -11,10 +11,13 @@ import ProductForFlatListSubScreen from './ProductForFlatListSubScreen'
 import Carousel from 'react-native-looped-carousel';
 import { any } from 'prop-types';
 const { width, height } = Dimensions.get('window');
+import { Query } from "react-apollo";
+import gql from "graphql-tag";
+
 
 
 export interface Props {
-navigation:any;
+    navigation: any;
 
 }
 
@@ -56,7 +59,7 @@ export default class ProductListingScreen extends React.Component<Props, State> 
         };
     }
 
-    _onLayoutDidChange = (e:any) => {
+    _onLayoutDidChange = (e: any) => {
         const layout = e.nativeEvent.layout;
         this.setState({ size: { width: layout.width, height: layout.height } });
     }
@@ -64,14 +67,13 @@ export default class ProductListingScreen extends React.Component<Props, State> 
     async componentDidMount() {
         // this.makeRemoteRequest();
 
-        const url = 'https://244c0529492d9a4f0608ee6819bea9cf:cddc810af568275df91c62bde72ccdce@kwanso-soban.myshopify.com/admin/api/2019-04/products.json'
-
+        const url = 'https://76d7bec1f9e27a5381d8b08e20a50d0a:d00ed612010adda003a365e62e8b87c6@testkwanso.myshopify.com/admin/api/2019-04/products.json'
         const data = await axios({
             method: 'get',
             url,
             auth: {
-                username: '244c0529492d9a4f0608ee6819bea9cf',
-                password: 'cddc810af568275df91c62bde72ccdce'
+                username: '76d7bec1f9e27a5381d8b08e20a50d0a',
+                password: 'd00ed612010adda003a365e62e8b87c6'
             }
         })
 
@@ -83,6 +85,28 @@ export default class ProductListingScreen extends React.Component<Props, State> 
         )
 
     }
+
+    GET_PRODUCTS = gql`
+     {
+        products(first:3) {
+          edges {
+            node {
+              id
+              handle
+              variants(first:3) {
+                edges {
+                  node {
+                    id
+                    displayName
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+`;
+
 
     makeRemoteRequest = () => {
         const { page, seed } = this.state;
@@ -155,7 +179,7 @@ export default class ProductListingScreen extends React.Component<Props, State> 
                 style={this.state.size}
                 autoplay
                 pageInfo
-                onAnimateNextPage={(p:any) => console.log(p)}
+                onAnimateNextPage={(p: any) => console.log(p)}
             >
 
                 <Image
@@ -214,6 +238,42 @@ export default class ProductListingScreen extends React.Component<Props, State> 
     render() {
         return (
             <View style={{ borderTopWidth: 0, borderBottomWidth: 0, backgroundColor: !this.state.firstLoad ? color.foreground : null }}>
+
+                {/* Graphql Query is implemented */}
+
+                {/* <Query query={this.GET_PRODUCTS}>
+                    {({ loading, error, data }) => {
+                        if (loading) return <Text>Loading...</Text>;
+                        if (error) return <Text>Error :( {console.warn(`@@@@@@@@@@@ ${error}`)}</Text>;
+
+                        return (
+                        // <Text>sdf{console.warn(data.products.edges[0].node.variants.edges[0].node.displayName)}</Text>
+                        <FlatList
+                        data={data.products.edges}
+                        renderItem={({ item }) => (
+    
+                            <ProductForFlatListSubScreen item={item} navigate={this.props.navigation.navigate} />
+    
+                        )}
+                        // keyExtractor={item => item.id}
+                        // ItemSeparatorComponent={this.renderSeparator}
+                        ListHeaderComponent={this.renderHeader}
+                        ListFooterComponent={this.renderFooter}
+                        // onRefresh={this.handleRefresh}
+                        refreshing={this.state.refreshing}
+                        // onEndReached={this.handleLoadMore}
+                        onEndReachedThreshold={50}
+                        numColumns={2}
+                    />
+                        )
+                        //   return data.rates.map(({ currency, rate }) => (
+                        //     <View key={currency}>
+                        //       <Text>{currency}: {rate}</Text>
+                        //     </View>
+                        //   ));
+                    }}
+                </Query> */}
+
                 <Search
                     backgroundColor='white'
                     cancelButtonTextStyle={{ color: color.background }}
@@ -223,23 +283,26 @@ export default class ProductListingScreen extends React.Component<Props, State> 
                     blurOnSubmit={true}
                 />
 
-                {this.state.firstLoad ? <ActivityIndicator size="large" color={color.background} /> : <FlatList
-                    data={this.state.data.products}
-                    renderItem={({ item }) => (
 
-                        <ProductForFlatListSubScreen item={item} navigate={this.props.navigation.navigate} />
+                {this.state.firstLoad ? <ActivityIndicator size="large" color={color.background} /> :
 
-                    )}
-                    keyExtractor={item => item.id}
-                    // ItemSeparatorComponent={this.renderSeparator}
-                    ListHeaderComponent={this.renderHeader}
-                    ListFooterComponent={this.renderFooter}
-                    // onRefresh={this.handleRefresh}
-                    refreshing={this.state.refreshing}
-                    // onEndReached={this.handleLoadMore}
-                    onEndReachedThreshold={50}
-                    numColumns={2}
-                />
+                    <FlatList
+                        data={this.state.data.products}
+                        renderItem={({ item }) => (
+
+                            <ProductForFlatListSubScreen item={item} navigate={this.props.navigation.navigate} />
+
+                        )}
+                        keyExtractor={item => item.id}
+                        // ItemSeparatorComponent={this.renderSeparator}
+                        ListHeaderComponent={this.renderHeader}
+                        ListFooterComponent={this.renderFooter}
+                        // onRefresh={this.handleRefresh}
+                        refreshing={this.state.refreshing}
+                        // onEndReached={this.handleLoadMore}
+                        onEndReachedThreshold={50}
+                        numColumns={2}
+                    />
                 }
 
             </View>

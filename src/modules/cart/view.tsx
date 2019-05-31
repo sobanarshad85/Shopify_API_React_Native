@@ -44,14 +44,13 @@ class CartScreen extends React.Component<Props, State>  {
     async componentDidMount() {
         // this.makeRemoteRequest();
 
-        const url = 'https://244c0529492d9a4f0608ee6819bea9cf:cddc810af568275df91c62bde72ccdce@kwanso-soban.myshopify.com/admin/api/2019-04/products.json'
-
+const url='https://76d7bec1f9e27a5381d8b08e20a50d0a:d00ed612010adda003a365e62e8b87c6@testkwanso.myshopify.com/admin/api/2019-04/products.json'
         const data = await axios({
             method: 'get',
             url,
             auth: {
-                username: '244c0529492d9a4f0608ee6819bea9cf',
-                password: 'cddc810af568275df91c62bde72ccdce'
+                username: '76d7bec1f9e27a5381d8b08e20a50d0a',
+                password: 'd00ed612010adda003a365e62e8b87c6'
             }
         })
 
